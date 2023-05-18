@@ -1,0 +1,32 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+module load cuda/11.5.2
+module load python/anaconda3
+module load singularity/3.9.5
+
+export MODULEPATH="$MODULEPATH:$HOME/apps/modulefiles"
+module load emacs/
+module load tmux/
+
+tmux source-file ~/.tmux.config
+
+if [ "$(ls -A ~/google-drive-phenikaa)" ]; then
+    echo "~/google-drive-phenikaa is already mounted."
+else
+    echo "~/google-drive-phenikaa has been mounted."
+    google-drive-ocamlfuse ~/google-drive-phenikaa/
+fi
+
+if [ "$(ls -A ~/personnal-google-drive)" ]; then
+    echo "~/google-drive-phenikaa is already mounted."
+else
+    echo "~/personnal-google-drive has been mounted."
+    google-drive-ocamlfuse -label label ~/personnal-google-drive/
+fi
+

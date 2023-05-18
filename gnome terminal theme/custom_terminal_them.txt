@@ -1,0 +1,18 @@
+[/]
+default='f7ee80d1-dc54-4604-8f3a-adb7e710d3a3'
+list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9', 'f7ee80d1-dc54-4604-8f3a-adb7e710d3a3']
+
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+use-theme-colors=true
+
+[:f7ee80d1-dc54-4604-8f3a-adb7e710d3a3]
+background-color='rgb(30,29,29)'
+cursor-background-color='rgb(82,207,19)'
+cursor-colors-set=true
+cursor-foreground-color='rgb(199,54,54)'
+foreground-color='rgb(255,255,255)'
+highlight-background-color='rgb(205,202,202)'
+highlight-colors-set=false
+highlight-foreground-color='rgb(218,111,111)'
+use-theme-colors=false
+visible-name='Vu'
