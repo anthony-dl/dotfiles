@@ -1,0 +1,197 @@
+;; define user information
+(setq-default user-full-name "VuDLe")
+(setq-default user-mail-address "leducvuvietnam@gmail.com")
+
+(setq-default author (concat user-full-name "@" system-name)) 
+(setq-default editor (concat user-full-name "@" system-name))
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;; ; dracula theme
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;; (load-theme 'dracula t)
+
+;; ;; Adds the Melpa archive to the list of available repositories
+
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.org/packages/") t)
+
+;; ;; If there are no archived package contents, refresh them
+
+;; fullscreen at startup time
+(add-hook 'window-setup-hook' toggle-frame-maximized t)
+;; disable menu bar at start up
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+
+;; enable electric pair mode
+(electric-pair-mode 1)
+;; global-display-line-nuber
+;; (global-display-line-numbers-mode 1)
+(show-paren-mode 1)
+(global-auto-highlight-symbol-mode 1)
+(global-visual-line-mode t)
+
+; start auto-complete with emacs
+(require 'auto-complete)
+; do default config for auto-complete
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; Set OSX function key as Meta
+;; INSTALL PACKAGES
+;; --------------------------------------
+
+(add-to-list 'package-archives                                                                                                       
+             '("elpy" . "http://jorgenschaefer.github.io/packa..."))  
+
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/") t)
+
+;; activate all packages
+(package-initialize)
+;; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; define list of packages to install
+
+(defvar myPackages
+  '(better-defaults
+    material-theme
+    exec-path-from-shell
+    elpy
+    pyenv-mode)) 
+
+;; install all packages in list
+
+(mapc #'(lambda (package)
+    (unless (package-installed-p package)
+      (package-install package)))
+      myPackages)
+ 
+;; Use shell's $PATH
+
+(exec-path-from-shell-copy-env "PATH")
+
+ ;; BASIC CUSTOMIZATION
+;; --------------------------------------
+(setq inhibit-startup-message t)   ;; hide the startup message
+;; (load-theme 'material t)           ;; load material theme
+(global-linum-mode t)              ;; enable line numbers globally
+(setq linum-format "%4d \u2502 ")  ;; format line number spacing
+
+;; Allow hash to be entered 
+
+(global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
+;; set key binding for backward delete to Ctrl + J
+(global-set-key (kbd "C-h") 'backward-delete-char)
+(global-set-key (kbd "M-h") 'backward-kill-word)
+(global-set-key (kbd "C-j") 'newline)
+
+;; define list of packages to install
+(defvar myPackages
+  '(better-defaults
+    material-theme
+    elpy))
+
+(elpy-enable)
+;; (pyenv-mode)
+
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "-i --simple-prompt")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(tsdh-dark))
+ '(custom-safe-themes
+   '("8feca8afd3492985094597385f6a36d1f62298d289827aaa0d8a62fe6889b33c" "098bc2b3038a9a58b2f7034262b54f56a547d8d9a09ebe5b7a4a5fb6fbcaeae5" "f480b1a3d3ae7e5af21866b3214cdcdaf0f01830f6a189f572d155e323abb4ac" "356823de0567bf948354af8a2ab85db31612b8c299d243c5448e7c77866c2573" "05626f77b0c8c197c7e4a31d9783c4ec6e351d9624aa28bc15e7f6d6a6ebd926" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "f149d9986497e8877e0bd1981d1bef8c8a6d35be7d82cba193ad7e46f0989f6a" "1d78d6d05d98ad5b95205670fe6022d15dabf8d131fe087752cc55df03d88595" default))
+ '(package-selected-packages
+   '(github-dark-vscode-theme github-modern-theme bash-completion yaml-mode geolocation geoip elpygen auto-save-buffers-enhanced slurm-mode dockerfile-mode ein java-imports markdown-preview-mode markdown-preview-eww markdown-mode neotree dracula-theme github-theme pyvenv-auto pyenv-mode material-theme exec-path-from-shell elpy better-defaults auto-highlight-symbol auto-complete)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; This code section is for preventing generating ~ files
+(setq backup-by-copying t)
+(setq backup-directory-alist '(("." . "~/.emacs-backups")))
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
+;; Auto save after 10 seconds
+(global-auto-revert-mode t)
+(auto-save-visited-mode t)
+(setq auto-save-interval 5)
+(global-auto-revert-mode t)
+(setq auto-revert-interval 5)
+
+;; set link for to env for python IDE
+(setq python-shell-interpreter "/home/vu.leduc/.conda/envs/py39/bin/python3")
+(setq python-shell-interpreter-args "-i")
+(require 'pyvenv)
+(pyvenv-activate "/home/vu.leduc/.conda/envs/py39")
+
+(defun insert-update-header ()
+  "Insert or update header with current date and time."
+  (interactive)
+  (when (and buffer-file-name
+             (or (equal major-mode 'python-mode)
+                 (equal major-mode 'java-mode)
+                 (equal major-mode 'c-mode)
+                 (equal major-mode 'tex-mode)
+		 (equal major-mode 'latex-mode)
+		 ))
+    (let ((modified-time (format-time-string "%Y-%m-%d %H:%M:%S")))
+      (save-excursion
+        (goto-char (point-min))
+        (cond ((re-search-forward "Last updated: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" nil t)
+               (replace-match (concat "Last updated: " modified-time))))
+	(goto-char (point-min))
+	(cond ((re-search-forward "Last modified by: \\(.+\\)" nil t)
+               (replace-match (concat "Last modified by: " author))))
+	))))
+
+(add-hook 'before-save-hook 'insert-update-header)
+
+(defun my-python-file-header ()
+  "Add a header to Python files."
+  (interactive)
+  (when (not (file-exists-p buffer-file-name))
+    (goto-char (point-min))
+    (setq modified-time (format-time-string "%Y-%m-%d %H:%M:%S"))
+    (when (or (equal major-mode 'python-mode)
+	      (equal major-mode 'java-mode)
+	      (equal major-mode 'c-mode))
+      (insert (concat "# "
+		      (file-name-nondirectory buffer-file-name)
+		      "\n# Created on: "
+		      modified-time
+		      "\n# Author: "
+		      author
+		      "\n# Last updated: "
+		      modified-time
+		      "\n# Last modified by: "
+		      editor
+		      "\n\n")))
+    (when (or (eq major-mode 'tex-mode)
+	      (eq major-mode 'latex-mode))
+      (insert (concat "%% "
+		      (file-name-nondirectory buffer-file-name)
+		      "\n%% Created on: "
+		      modified-time
+		      "\n%% Author: "
+		      author
+		      "\n%% Last updated: "
+		      modified-time
+		      "\n%% Last modified by: "
+		      editor
+		      "\n\n")))))
+
+(add-hook 'write-file-functions 'my-python-file-header)
