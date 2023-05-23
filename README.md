@@ -7,7 +7,7 @@ Serveral changes have been made to original emacs, including the following key-b
 	 
 	 - Backward kill word: M-x + h
 	 
-Python IDE on emacs? I have also configured Emacs to become a lightweight yet powerful IDE with incredible code suggestions. In addition, code formaters such as flake8 and blacken are also integrated. The shortcut for formatting code with blaken in Emacs is ```C-c c```
+Python IDE on emacs? I have also configured Emacs to become a lightweight yet powerful IDE with incredible code suggestions. In addition, code formaters such as flake8 and blacken are also integrated. The shortcut for formatting code with blaken in Emacs is `C-c c`. For more information and more features, please visit [emacs folder](emacs)
 
 ## Tmux
 Primarily re-bind the ```Ctrl+b``` to ```Ctrl+q``` to avoid confliction with the ```Ctrl+b``` in the Linux terminal and Emacs which does the backward move.
@@ -17,3 +17,5 @@ You can customzing your terminal theme and export it to another Linux machine wi
 ```bash
 dconf load /org/gnome/terminal/legacy/profiles:/ < custom_terminal_theme.txt
 ```
+
+# More information and more advanaced tooling will be updated, espectially in Emacs.
