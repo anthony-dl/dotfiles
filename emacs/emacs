@@ -1,3 +1,10 @@
+;; replace these values by your own
+(setq-default user-full-name "VuDLe")
+(setq-default user-mail-address "leducvuvietnam@gmail.com")
+
+(setq-default author (concat user-full-name "@" system-name)) 
+(setq-default editor (concat user-full-name "@" system-name))
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 ;; ; dracula theme
@@ -127,12 +134,6 @@
 (require 'pyvenv)
 (pyvenv-activate "/home/vudle/anaconda3/envs/py39")
 
-(setq-default user-full-name "VuDLe")
-;; (setq-default user-mail-address "leducvuvietnam@gmail.com")
-
-(setq-default author (concat user-full-name "@" system-name)) 
-(setq-default editor (concat user-full-name "@" system-name))
-
 (defun my-python-file-header ()
   "Add a header to Python files."
   (interactive)
@@ -186,16 +187,21 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Install AUCTeX if not already installed
+(unless (package-installed-p 'auctex)
+  (package-refresh-contents)
+  (package-install 'auctex))
 
+(defun clean-latex-commands ()
+  "Run a Bash script."
+  (interactive)
+  (setq latex-file-name (file-name-nondirectory buffer-file-name))
+  (setq latex-file-name (concat "" latex-file-name ""))
+  (shell-command (format "pdflatex \"%s\"" latex-file-name))
+  ;; (output-buffer "*LaTeX Output*") ; Name of the output buffer
+  ;; (shell-command "rm *.out")
+  ;; (shell-command "rm *.log")
+  ;; (shell-command "rm *.aux")
+  )
 
-;; (setq python-shell-interpreter "ipython"
-;;       python-shell-interpreter-args "-i --simple-prompt")
-
-;; ;; set link for to env for python IDE
-;; (setq python-shell-interpreter "/home/vudle/anaconda/envs/py39/bin/python3")
-;; (setq python-shell-interpreter-args "-i")
-;; (require 'pyvenv)
-;; (pyvenv-activate "/home/vudle/anaconda/envs/py39")
-
-;; (setq-default user-full-name "VuDLe")
-;; (setq-default system-name "laptop-dell")
+(global-set-key (kbd "C-c l") 'clean-latex-commands)
