@@ -1,9 +1,12 @@
 # Emacs
+Edit 
 # Python IDE
-It works awesome
+It works awesome.
 
 # Latex Environments
-Apart from elpy mode for python IDE, this configuration also feature AuCTex for writing beautiful LaTex documents in Emacs. Here are some key-bindings for using LaTex in Emacs:
+Apart from elpy mode for python IDE, this configuration also feature AuCTex for writing beautiful LaTex documents in Emacs. To further raise the convinence when making a LaTex document, especially when it comes to inserting an image from clipboard (Screenshot for example), I additionally wrote a python script to take the image and save it in the image in the current folder that contains the main `.tex` file and insert all the snippet for it as well. To use such cool function, navigate to the [utils](../utils) folder and run `bash setup.sh` to make the python script callable from anywhere. The key-binding for this function is `C-c i`, which stands for inserting.
+
+In addition, here are some key-bindings for using LaTex with AUCTex in Emacs:
 
 ## Changing the font
 <details>

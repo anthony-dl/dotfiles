@@ -25,7 +25,6 @@ def increment_path(path, exist_ok=False, sep="", mkdir=False):
 try:
     os.makedirs("clipboard", exist_ok=True)
     path = "clipboard/image.png"
-    print("do")
     image = ImageGrab.grabclipboard()
     path = increment_path(path)
     if image is None:
@@ -35,7 +34,7 @@ try:
         snippet = (
             r"\begin{figure}[h]"
             + "\n \t \centering"
-            + f"\n \t \includegraphics[width=\linewidth]{path}"
+            + f"\n \t \includegraphics[width=\linewidth]{{{path}}}"
             + "\n \t \caption{a nice plot}"
             + "\n \t \label{fig:fig}"
             + "\n \end{figure}"
