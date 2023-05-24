@@ -1,4 +1,3 @@
-;; replace these values by your own
 (setq-default user-full-name "VuDLe")
 (setq-default user-mail-address "leducvuvietnam@gmail.com")
 
@@ -193,15 +192,46 @@
   (package-install 'auctex))
 
 (defun clean-latex-commands ()
-  "Run a Bash script."
+  "Run bash script to remove Latex log files."
+  (interactive)
+  (when (or (eq major-mode 'tex-mode)
+	    (eq major-mode 'latex-mode))
+    (shell-command "rm -f *.out")
+    (shell-command "rm -f *.log")
+    (shell-command "rm -f *.aux")
+    (shell-command "rm -f *.snm")
+    (shell-command "rm -f *.toc")
+    (shell-command "rm -f *.bbl")
+    (shell-command "rm -f *.blg")
+    (shell-command "rm -f *.nav")
+    (shell-command "rm -f *-blx.bib")
+    (shell-command "rm -f *.run.xml")
+    (message "Cleaned latex output log files")
+    )
+  )
+
+(global-set-key (kbd "C-c c") 'clean-latex-commands)
+
+(defun make-latex-commands ()
+  "Run a Bash script to compile pdflatex."
   (interactive)
   (setq latex-file-name (file-name-nondirectory buffer-file-name))
   (setq latex-file-name (concat "" latex-file-name ""))
   (shell-command (format "pdflatex \"%s\"" latex-file-name))
-  ;; (output-buffer "*LaTeX Output*") ; Name of the output buffer
-  ;; (shell-command "rm *.out")
-  ;; (shell-command "rm *.log")
-  ;; (shell-command "rm *.aux")
+  (message "Compiled PDFLaTex"))
+
+(global-set-key (kbd "C-c l") 'make-latex-commands)
+
+
+(defun insert-latex-image-from-clipboard ()
+  "Take and save the image taken from clipboard and insert the snippet in the current buffer."
+  (interactive)
+  (setq output (shell-command-to-string "clipboard.py"))
+  (when (or (eq major-mode 'tex-mode)
+	    (eq major-mode 'latex-mode))
+    (insert output)
+    (message "Inserted image and snippet from clipboard"))
   )
 
-(global-set-key (kbd "C-c l") 'clean-latex-commands)
+(global-set-key (kbd "C-c i") 'insert-latex-image-from-clipboard)
+

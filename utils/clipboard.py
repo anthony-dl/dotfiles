@@ -23,9 +23,9 @@ def increment_path(path, exist_ok=False, sep="", mkdir=False):
 
 
 try:
+    image = ImageGrab.grabclipboard()
     os.makedirs("clipboard", exist_ok=True)
     path = "clipboard/image.png"
-    image = ImageGrab.grabclipboard()
     path = increment_path(path)
     if image is None:
         print("No image found on the clipboard")
