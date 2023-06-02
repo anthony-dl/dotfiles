@@ -1,3 +1,4 @@
+(setq-default system-name "PC-Phenikaa")
 (setq-default user-full-name "VuDLe")
 (setq-default user-mail-address "leducvuvietnam@gmail.com")
 
@@ -52,6 +53,8 @@
 (global-set-key (kbd "C-h") 'backward-delete-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-j") 'newline)
+;; revert buffer by C-c r
+(global-set-key (kbd "C-c r") 'revert-buffer)
 
 ;; This code section is for preventing generating ~ files
 (setq backup-by-copying t)
@@ -186,6 +189,8 @@
  ;; If there is more than one, they won't work right.
  )
 
+
+;;;;;;;;;;; LaTex configuration begins ;;;;;;;;;;
 ;; Install AUCTeX if not already installed
 (unless (package-installed-p 'auctex)
   (package-refresh-contents)
@@ -201,7 +206,7 @@
     )
   )
 
-(global-set-key (kbd "C-c c") 'clean-latex-commands)
+(global-set-key (kbd "C-c C-x C-c") 'clean-latex-commands)
 
 (defun make-latex-commands ()
   "Run a Bash script to compile pdflatex."
@@ -213,14 +218,16 @@
     (setq filename (file-name-sans-extension latex-file-name) )
   
     (shell-command (format "pdflatex -interaction=nonstopmode %s.tex" filename))
+    ;; (message (buffer-name (current-buffer)))
     (when (search-forward-regexp "bibliography{" nil t)
       (message "creating bibliography")
       (shell-command (format "bibtex %s.aux" filename)))
     (when (search-forward "\\makeindex" nil t)
+      (message "creating bibliography")
       (shell-command (format "makeindex %s" filename)))
     
-    (shell-command (format "pdflatex -interaction=nonstopmode %s.tex" filename))
-    (shell-command (format "pdflatex -interaction=nonstopmode %s.tex" filename))
+    (shell-command (format "pdflatex -interaction=nonstopmode '%s'.tex" filename))
+    (shell-command (format "pdflatex -interaction=nonstopmode '%s'.tex" filename))
     (message "Compiled PDFLaTex successfully")))
 
 (global-set-key (kbd "C-c l") 'make-latex-commands)
@@ -238,3 +245,7 @@
 
 (global-set-key (kbd "C-c i") 'insert-latex-image-from-clipboard)
 
+(add-hook 'LaTex-mode-hook 'flyspell-mode)
+(add-hook 'TeX-mode-hook 'flyspell-mode)
+
+;;;;;;;;;;; LaTex configuration ends ;;;;;;;;;;

@@ -32,7 +32,7 @@ try:
     else:
         image.save(path)
         snippet = (
-            r"\begin{figure}[h]"
+            r"\begin{figure}[htbp]"
             + "\n \t \centering"
             + f"\n \t \includegraphics[width=\linewidth]{{{path}}}"
             + "\n \t \caption{a nice plot}"
