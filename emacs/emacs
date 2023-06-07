@@ -136,7 +136,7 @@
 (require 'pyvenv)
 (pyvenv-activate "/home/vudle/anaconda3/envs/py39")
 
-(defun my-python-file-header ()
+(defun file-header ()
   "Add a header to Python files."
   (interactive)
   (when (not (file-exists-p buffer-file-name))
@@ -170,7 +170,31 @@
 		      editor
 		      "\n\n")))))
 
-(add-hook 'write-file-functions 'my-python-file-header)
+(add-hook 'write-file-functions 'file-header)
+
+(defun insert-update-header ()
+  "Insert or update header with current date and time."
+  (interactive)
+  (when (and buffer-file-name
+             (or (equal major-mode 'python-mode)
+                 (equal major-mode 'java-mode)
+                 (equal major-mode 'c-mode)
+                 (equal major-mode 'tex-mode)
+		 (equal major-mode 'latex-mode)
+		 ))
+    (let ((modified-time (format-time-string "%Y-%m-%d %H:%M:%S")))
+      (save-excursion
+        (goto-char (point-min))
+        (cond ((re-search-forward "Last updated: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" nil t)
+               (replace-match (concat "Last updated: " modified-time))))
+	(goto-char (point-min))
+	(cond ((re-search-forward "Last modified by: \\(.+\\)" nil t)
+               (replace-match (concat "Last modified by: " author))))
+	))))
+
+(add-hook 'before-save-hook 'insert-update-header)
+
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
