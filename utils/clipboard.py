@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 from PIL import ImageGrab
 import os
 from pathlib import Path
