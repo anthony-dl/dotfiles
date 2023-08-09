@@ -13,4 +13,4 @@ else
     google-drive-ocamlfuse -label label ~/personnal-google-drive/
 fi
 
-tmux source-file ~/.tmux.config
+tmux source-file ~/.tmux.conf
