@@ -1,4 +1,4 @@
-(setq-default system-name "PC-Phenikaa")
+(setq-default system-name "phenikaa-x")
 (setq-default user-full-name "VuDLe")
 (setq-default user-mail-address "leducvuvietnam@gmail.com")
 
@@ -6,19 +6,40 @@
 (setq-default editor (concat user-full-name "@" system-name))
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
 ;; ; dracula theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
-(add-to-list 'package-archives
-             '("elpy" . "http://jorgenschaefer.github.io/packa..."))
-
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t)
 ;; (load-theme 'dracula t)
 
-;; ;; If there are no archived package contents, refresh them
+;; If there are no archived package contents, refresh them
+;; activate all packages
+(package-initialize)
+(package-refresh-contents)
+;; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
 
+;; define list of packages to install
+(defvar myPackages
+  '(better-defaults
+    auto-highlight-symbol
+    material-theme
+    exec-path-from-shell
+    auto-complete
+    elpy
+    blacken ;; Black formatting on save
+    pyenv-mode)) 
+
+;; install all packages in list
+(mapc #'(lambda (package)
+    (unless (package-installed-p package)
+      (package-install package)))
+      myPackages)
 
 ;; BASIC CUSTOMIZATION
 
@@ -74,28 +95,6 @@
 ; do default config for auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
-
-;; activate all packages
-(package-initialize)
-;; fetch the list of packages available
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; define list of packages to install
-(defvar myPackages
-  '(better-defaults
-    material-theme
-    exec-path-from-shell
-    elpy
-    blacken ;; Black formatting on save
-    pyenv-mode)) 
-
-;; install all packages in list
-
-(mapc #'(lambda (package)
-    (unless (package-installed-p package)
-      (package-install package)))
-      myPackages)
 
 ;; Enable blacken on save
 ;; In Emacs, python-mode-hook is a special variable that holds a list of functions to be called when python-mode is activated. Hooks in Emacs allow you to customize the behavior of a mode by running specific functions at certain points.
@@ -205,7 +204,7 @@
  '(custom-safe-themes
    '("8feca8afd3492985094597385f6a36d1f62298d289827aaa0d8a62fe6889b33c" "098bc2b3038a9a58b2f7034262b54f56a547d8d9a09ebe5b7a4a5fb6fbcaeae5" "f480b1a3d3ae7e5af21866b3214cdcdaf0f01830f6a189f572d155e323abb4ac" "356823de0567bf948354af8a2ab85db31612b8c299d243c5448e7c77866c2573" "05626f77b0c8c197c7e4a31d9783c4ec6e351d9624aa28bc15e7f6d6a6ebd926" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "f149d9986497e8877e0bd1981d1bef8c8a6d35be7d82cba193ad7e46f0989f6a" "1d78d6d05d98ad5b95205670fe6022d15dabf8d131fe087752cc55df03d88595" default))
  '(package-selected-packages
-   '(pdf-tools auctex jupyter use-package column-enforce-mode github-dark-vscode-theme github-modern-theme bash-completion yaml-mode geolocation geoip elpygen auto-save-buffers-enhanced slurm-mode dockerfile-mode ein java-imports markdown-preview-mode markdown-preview-eww markdown-mode neotree dracula-theme github-theme pyvenv-auto pyenv-mode material-theme exec-path-from-shell elpy better-defaults auto-highlight-symbol auto-complete)))
+   '(pdf-tools auctex jupyter use-package column-enforce-mode github-dark-vscode-theme github-modern-theme bash-completion yaml-mode geolocation geoip elpygen auto-save-buffers-enhanced slurm-mode dockerfile-mode ein java-imports markdown-preview-mode markdown-preview-eww markdown-mode neotree dracula-theme github-theme pyvenv-auto pyenv-mode material-theme exec-path-from-shell elpy auto-highlight-symbol auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

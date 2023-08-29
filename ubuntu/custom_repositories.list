@@ -1,4 +1,4 @@
-# deb cdrom:[Ubuntu 22.04.1 LTS _Jammy Jellyfish_ - Release amd64 (20220809.1)]/ jammy main restricted
+#deb cdrom:[Ubuntu 22.04.2 LTS _Jammy Jellyfish_ - Release amd64 (20230223)]/ jammy main restricted
 
 # See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
 # newer versions of the distribution.
@@ -48,19 +48,3 @@ deb http://security.ubuntu.com/ubuntu jammy-security multiverse
 # entries were disabled at the end of the installation process.
 # For information about how to configure apt package sources,
 # see the sources.list(5) manual.
-deb https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu/ jammy main
-# deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu/ jammy main
-deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-# deb-src [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-### THIS FILE IS AUTOMATICALLY CONFIGURED ###
-# You may comment out this entry, but any other modifications may be lost.
-deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
-deb [arch=amd64 signed-by=/usr/share/keyrings/obs-onedrive.gpg] https://download.opensuse.org/repositories/home:/npreining:/debian-ubuntu-onedrive/xUbuntu_22.04/ ./
-deb https://ppa.launchpadcontent.net/stebbins/handbrake-releases/ubuntu/ jammy main
-# deb-src https://ppa.launchpadcontent.net/stebbins/handbrake-releases/ubuntu/ jammy main
-deb https://ppa.launchpadcontent.net/tatokis/alarm-clock-applet/ubuntu/ jammy main
-# deb-src https://ppa.launchpadcontent.net/tatokis/alarm-clock-applet/ubuntu/ jammy main
-### THIS FILE IS AUTOMATICALLY CONFIGURED ###
-# You may comment out this entry, but any other modifications may be lost.
-deb [arch=amd64,arm64,armhf] http://packages.microsoft.com/repos/code stable main
-deb https://dl.yarnpkg.com/debian/ stable main

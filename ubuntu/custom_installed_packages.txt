@@ -49,7 +49,6 @@ libxkbfile-dev
 linux-generic-hwe-22.04
 login
 mokutil
-mysql-server
 mythes-en-us
 nautilus
 ncurses-base
