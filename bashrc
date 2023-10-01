@@ -84,3 +84,6 @@ export HISTFILESIZE=100000
 
 # make emacs run on bash terminal by default
 alias emacs='emacs -nw'
+
+# export xterm-256 color for tmux (avoid white texts)
+export TERM=xterm-256color
