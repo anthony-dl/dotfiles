@@ -157,21 +157,23 @@
   (interactive)
   (when (not (file-exists-p buffer-file-name))
     (goto-char (point-min))
-    (setq modified-time (format-time-string "%Y-%m-%d %H:%M:%S"))
+    (setq modified-time (format-time-string "%Y-%m-%d %H:%M"))
     (when (or (equal major-mode 'python-mode)
 	      ;; (equal major-mode 'java-mode)
 	      (equal major-mode 'c-mode))
-      (insert (concat "# "
+      (insert (concat "\"\"\"\n"
 		      (file-name-nondirectory buffer-file-name)
-		      "\n# Created on: "
+		      "\nCreated: "
 		      modified-time
-		      "\n# Author: "
+		      "\nAuthor: "
 		      author
-		      "\n# Last updated: "
+		      "\nLast updated: "
 		      modified-time
-		      "\n# Last modified by: "
+		      "\nLast modified by: "
 		      editor
-		      "\n\n")))
+		      "\nLicense: © Copyright 2022-2024, Vu Le"
+		      "\nDesc:"
+		      "\n\"\"\"\n\n")))
     (when (or (eq major-mode 'tex-mode)
 	      (eq major-mode 'latex-mode))
       (insert (concat "%% "
