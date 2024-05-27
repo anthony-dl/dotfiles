@@ -1,16 +1,21 @@
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+
 Host *
-     ServerAliveInterval 60
+  ServerAliveInterval 60
 
-Host 10.20.8.11
-  HostName 10.20.8.11
-  User vu.leduc
+Host laptop-hanoi
+  HostName 192.168.31.72
+  User vudle
 
-Host phenikaa-dgx-compute
-  HostName hpc-dgx01
-  User vu.leduc
-  ProxyJump 10.20.8.11
+Host myproxyserver
+	 User ubuntu
+	 Hostname ec2-13-213-31-69.ap-southeast-1.compute.amazonaws.com
+	 IdentityFile ~/workspace/keys/anthony_vule_aws.pem
 
-Host phenikaa-hpc24-compute
-  HostName hpc24
-  User vu.leduc
-  ProxyJump 10.20.8.11
+Host SomeServer-jump
+	 User user_name
+	 Hostname host_name_or_domain
+	 ProxyJump myproxyserver

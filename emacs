@@ -64,9 +64,8 @@
 
 ;; User-Defined init.el ends here
 
-(setq-default system-name "phenikaa-x")
-(setq-default user-full-name "VuDLe")
-(setq-default user-mail-address "leducvuvietnam@gmail.com")
+(setq-default system-name "UMassAmherst")
+(setq-default user-full-name "VuLe")
 
 (setq-default author (concat user-full-name "@" system-name)) 
 (setq-default editor (concat user-full-name "@" system-name))
